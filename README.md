@@ -10,3 +10,6 @@ Two buttons:
 Change the `HOST_URL` inside the `.env` file to the IP of the host machine.
 
 Run `docker-compose up` from this folder.
+
+Go to `HOST_URL`
+
