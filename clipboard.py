@@ -15,7 +15,7 @@ read_env()
 
 if argparse.Namespace(output=True) in args:
     response = requests.get(url=os.environ['HOST_URL'] + '/clipboard').json()
-    print(response['clipboard'])
+    print(response['clipboard'], end="")
 else:
     input_data = " ".join(args[1])
     requests.post(url=os.environ['HOST_URL'] + '/clipboard', json={'clipboard': input_data})
