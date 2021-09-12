@@ -52,6 +52,8 @@ void post(CURL* curl, char* content){
     curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, strlen(content));
     curl_easy_setopt(curl, CURLOPT_POSTFIELDS, content);
     curl_easy_perform(curl);
+
+    if(hs != NULL) curl_slist_free_all(hs); // free memory
 }
 
 void get(CURL* curl){
@@ -59,6 +61,12 @@ void get(CURL* curl){
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, cb);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&chunk);
     curl_easy_perform(curl);
+
+    char* response = chunk.response + 14; // skip {\"clipboard\":\"
+    size_t len = strlen(response);
+    response[len - 2] = '\0'; // skip ending "} with null termination
+
+    printf("%s", response);
 }
 
 size_t compute_size(int argc, char* argv[]){
@@ -106,6 +114,7 @@ int main(int argc, char *argv[]){
             strcat(data, "\"}");
             post(curl, data);
             free(clip);
+            free(data);
         }
     }
     curl_easy_cleanup(curl);
