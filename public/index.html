@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shared Clipboard</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+    <script type="text/javascript">
+const url = window.location.href + 'clipboard';
+
+function get() {
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.clipboard)
+            document.getElementById("clipboard").value = data.clipboard;
+        });
+}
+
+function update () {
+    const value = document.getElementById("clipboard").value;
+    const options = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({clipboard: value})
+        };
+    fetch(url, options);
+}
+
+get();
+    </script>
+</head>
+<body>
+<div style="text-align: center;">
+    <textarea style="padding: 2em;" rows=5 cols=80 id="clipboard"></textarea>
+    <div>
+        <button class="material-icons" onclick="update()">upload</button>
+        <button class="material-icons" onclick="get()">refresh</button>
+    </div>
+</div>
+</body>
+</html>

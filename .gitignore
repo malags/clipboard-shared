@@ -84,6 +84,7 @@ typings/
 dist
 build
 tmp_build
+clipboard
 
 # Gatsby files
 .cache/
