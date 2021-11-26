@@ -1,12 +1,13 @@
 # clipboard-shared
 
-Small web application that hosts a shared clipboard.
+Small web application that hosts a shared clipboard, can be used to self-host a simple web app to share to text between devices.
 
 GUI with two buttons:
-- Copy: shared clipboard -> clipboard
-- Paste: clipboard -> shared clipboard
+- Upload to shared clipboard
+- Update local view
 
 ## Usage
+
 Change the `HOST_URL` inside the `.env` file to the IP of the host machine.
 
 Run `docker-compose up` from this folder.
